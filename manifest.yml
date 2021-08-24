@@ -1,0 +1,10 @@
+---
+applications:
+- name: cf-nodejs
+  memory: 512M
+  instances: 1
+  random-route: true
+  routes:
+    - route: cf-nodejs-qas.cfapps.us10.hana.ondemand.com
+  services:
+    - jco-xsuaa
