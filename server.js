@@ -15,8 +15,11 @@ app.use(express.json({
 
 //CORS Configuration
 var allowlist = ['https://workspaces-ws-2x82d-app1.us10.applicationstudio.cloud.sap', 
-                    'https://workspaces-ws-8m9sh-app1.us10.applicationstudio.cloud.sap'];
+                'https://workspaces-ws-8m9sh-app1.us10.applicationstudio.cloud.sap',
+                'https://workspaces-ws-5btxh-app3.us10.applicationstudio.cloud.sap'];
+
 var corsOptionsDelegate = function (req, callback) {
+  console.log(JSON.Stringify(req));
   var corsOptions;
   if (allowlist.indexOf(req.header('Origin')) !== -1) {
     corsOptions = { origin: true} // reflect (enable) the requested origin in the CORS response
@@ -107,7 +110,7 @@ app.get('/api/embarcacion/listaEmbarcacion', cors(corsOptionsDelegate),function 
         res.status(500).send('ERROR: ' + error.message + ' - FULL ERROR: ' + error.error);
     });    
 });
-
+'https://cf-nodejs-qas.cfapps.us10.hana.ondemand.com/api/embarcacion/listaTipoEmbarcacion'."
 //post
 app.post('/api/embarcacion/listaTipoEmbarcacion', cors(corsOptionsDelegate),function (req, res) {  
     console.log('Node server has been invoked. Now calling Backend service API ...');
