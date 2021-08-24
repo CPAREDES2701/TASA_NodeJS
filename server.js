@@ -20,7 +20,6 @@ var allowlist = ['https://workspaces-ws-2x82d-app1.us10.applicationstudio.cloud.
                 'https://workspaces-ws-xjjtj-app2.us10.applicationstudio.cloud.sap',
                 'https://workspaces-ws-xjjtj-app4.us10.applicationstudio.cloud.sap'];
 var corsOptionsDelegate = function (req, callback) {
-  console.log(JSON.Stringify(req));
   var corsOptions;
   if (allowlist.indexOf(req.header('Origin')) !== -1) {
     corsOptions = { origin: true} // reflect (enable) the requested origin in the CORS response
