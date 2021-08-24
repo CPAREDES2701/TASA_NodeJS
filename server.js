@@ -15,7 +15,10 @@ app.use(express.json({
 
 //CORS Configuration
 var allowlist = ['https://workspaces-ws-2x82d-app1.us10.applicationstudio.cloud.sap', 
-                    'https://workspaces-ws-8m9sh-app1.us10.applicationstudio.cloud.sap'];
+                'https://workspaces-ws-8m9sh-app1.us10.applicationstudio.cloud.sap',
+                'https://workspaces-ws-5btxh-app3.us10.applicationstudio.cloud.sap',
+                'https://workspaces-ws-xjjtj-app2.us10.applicationstudio.cloud.sap',
+                'https://workspaces-ws-xjjtj-app4.us10.applicationstudio.cloud.sap'];
 var corsOptionsDelegate = function (req, callback) {
   var corsOptions;
   if (allowlist.indexOf(req.header('Origin')) !== -1) {
