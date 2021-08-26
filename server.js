@@ -19,7 +19,8 @@ var allowlist = [
     'https://workspaces-ws-8m9sh-app1.us10.applicationstudio.cloud.sap',
     'https://workspaces-ws-5btxh-app3.us10.applicationstudio.cloud.sap',
     'https://workspaces-ws-xjjtj-app2.us10.applicationstudio.cloud.sap', // workspace @celso
-    'https://workspaces-ws-xjjtj-app4.us10.applicationstudio.cloud.sap'  // workspace @celso
+    'https://workspaces-ws-xjjtj-app4.us10.applicationstudio.cloud.sap',  // workspace @celso
+    'https://tasaqas.launchpad.cfapps.us10.hana.ondemand.com'             // launchpad 
 ];
 var corsOptionsDelegate = function (req, callback) {
   var corsOptions;
