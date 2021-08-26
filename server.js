@@ -18,6 +18,7 @@ var allowlist = [
     'https://workspaces-ws-2x82d-app1.us10.applicationstudio.cloud.sap',
     'https://workspaces-ws-8m9sh-app1.us10.applicationstudio.cloud.sap',
     'https://workspaces-ws-5btxh-app3.us10.applicationstudio.cloud.sap',
+    'https://workspaces-ws-jtjkx-app1.us10.applicationstudio.cloud.sap', // workspace @leonel
     'https://workspaces-ws-xjjtj-app2.us10.applicationstudio.cloud.sap', // workspace @celso
     'https://workspaces-ws-xjjtj-app4.us10.applicationstudio.cloud.sap',  // workspace @celso
     'https://tasaqas.launchpad.cfapps.us10.hana.ondemand.com'             // launchpad 
@@ -163,6 +164,27 @@ app.post('/api/General/Update_Table/', cors(corsOptionsDelegate),function (req, 
     .then((result) => {
         console.log('Successfully fetched OAuth access token: ' +  result.accessToken.substring(0,16));
         var sUrl = HOST + "/api/General/Update_Table/";
+        return _doQUERY(sUrl, result.accessToken, req.body, 'POST');
+    })
+    .then((result) => {
+        console.log('Successfully called OData service. Response body: ' + result.responseBody);
+        res.status(200).send(JSON.stringify(result.responseBody));
+    })
+    .catch((error) => {
+        console.log(error.message + ' Reason: ' + error.error);
+        res.status(500).send('ERROR: ' + error.message + ' - FULL ERROR: ' + error.error);
+    });    
+});
+
+/**
+ * POST Reporte Pesca
+ */
+app.post('/api/reportepesca/ConsultarCalas', cors(corsOptionsDelegate),function (req, res) {  
+    console.log('Node server has been invoked. Now calling Backend service API ...');
+    _getAccessToken()
+    .then((result) => {
+        console.log('Successfully fetched OAuth access token: ' +  result.accessToken.substring(0,16));
+        var sUrl = HOST + "/api/reportepesca/ConsultarCalas";
         return _doQUERY(sUrl, result.accessToken, req.body, 'POST');
     })
     .then((result) => {
