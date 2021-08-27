@@ -14,9 +14,10 @@ app.use(express.json({
 //var data = [{"wa":"ESREG = 'S'"}];
 
 //CORS Configuration
-var allowlist = [
+var allowlist = [ 
     'https://workspaces-ws-2x82d-app1.us10.applicationstudio.cloud.sap',
     'https://workspaces-ws-8m9sh-app1.us10.applicationstudio.cloud.sap',
+    'https://workspaces-ws-8m9sh-app4.us10.applicationstudio.cloud.sap',
     'https://workspaces-ws-5btxh-app3.us10.applicationstudio.cloud.sap',
     'https://workspaces-ws-jtjkx-app1.us10.applicationstudio.cloud.sap', // workspace @leonel
     'https://workspaces-ws-xjjtj-app2.us10.applicationstudio.cloud.sap', // workspace @celso
@@ -153,6 +154,24 @@ app.get('/api/embarcacion/listaPlantas', cors(corsOptionsDelegate),function (req
     });    
 });
 
+//get distribucion flota
+app.get('/api/embarcacion/ObtenerFlota', cors(corsOptionsDelegate),function (req, res) {  
+    console.log('Node server has been invoked. Now calling Backend service API ...');
+    _getAccessToken()
+    .then((result) => {
+        console.log('Successfully fetched OAuth access token: ' +  result.accessToken.substring(0,16));
+        var sUrl = HOST + "/api/embarcacion/ObtenerFlota?user=" + req.query.usuario;
+        return _doQUERY(sUrl, result.accessToken, null, 'GET');
+    })
+    .then((result) => {
+        console.log('Successfully called OData service. Response body: ' + result.responseBody);
+        res.status(200).send(JSON.stringify(result.responseBody));
+    })
+    .catch((error) => {
+        console.log(error.message + ' Reason: ' + error.error);
+        res.status(500).send('ERROR: ' + error.message + ' - FULL ERROR: ' + error.error);
+    });    
+});
 
 /**
  * POST Read table
