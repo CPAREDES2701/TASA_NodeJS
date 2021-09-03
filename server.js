@@ -14,7 +14,8 @@ app.use(express.json({
 //var data = [{"wa":"ESREG = 'S'"}];
 
 //CORS Configuration
-var allowlist = [ 
+var allowlist = [
+    'http://localhost:8080', 
     'https://workspaces-ws-2x82d-app1.us10.applicationstudio.cloud.sap',
     'https://workspaces-ws-8m9sh-app1.us10.applicationstudio.cloud.sap',
     'https://workspaces-ws-8m9sh-app4.us10.applicationstudio.cloud.sap',
