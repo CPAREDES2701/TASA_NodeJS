@@ -21,6 +21,7 @@ var allowlist = [
     'https://workspaces-ws-8m9sh-app4.us10.applicationstudio.cloud.sap',
     'https://workspaces-ws-5btxh-app3.us10.applicationstudio.cloud.sap',
     'https://workspaces-ws-jtjkx-app1.us10.applicationstudio.cloud.sap', // workspace @leonel
+    'https://workspaces-ws-lf8m4-app1.us10.applicationstudio.cloud.sap', // workspace @Piero
     'https://workspaces-ws-xjjtj-app2.us10.applicationstudio.cloud.sap', // workspace @celso
     'https://workspaces-ws-xjjtj-app4.us10.applicationstudio.cloud.sap',  // workspace @celso
     'https://workspaces-ws-cq9mq-app1.us10.applicationstudio.cloud.sap',    // workspace @Christopher
