@@ -26,6 +26,7 @@ var allowlist = [
     'https://workspaces-ws-xjjtj-app4.us10.applicationstudio.cloud.sap',  // workspace @celso
     'https://workspaces-ws-cq9mq-app1.us10.applicationstudio.cloud.sap',    // workspace @Christopher
     'https://workspaces-ws-6hf6v-app1.us10.applicationstudio.cloud.sap',    // workspace @Cesar
+    'https://workspaces-ws-cd8st-app1.us10.applicationstudio.cloud.sap',    // workspace @leonel
     'https://tasaqas.launchpad.cfapps.us10.hana.ondemand.com'             // launchpad 
 ];
 var corsOptionsDelegate = function (req, callback) {
