@@ -106,6 +106,50 @@ const _getAccessToken = function() {
     });
  };
 
+ /**
+  * POST Listar Eventos Pesca
+  */
+
+ app.post('/api/configeventospesca/Listar', cors(corsOptionsDelegate),function (req, res) {  
+    console.log('Node server has been invoked. Now calling Backend service API ...');
+    _getAccessToken()
+    .then((result) => {
+        console.log('Successfully fetched OAuth access token: ' +  result.accessToken.substring(0,16));
+        var sUrl = HOST + "/api/configeventospesca/Listar";
+        return _doQUERY(sUrl, result.accessToken, req.body, 'POST');
+    })
+    .then((result) => {
+        console.log('Successfully called OData service. Response body: ' + result.responseBody);
+        res.status(200).send(JSON.stringify(result.responseBody));
+    })
+    .catch((error) => {
+        console.log(error.message + ' Reason: ' + error.error);
+        res.status(500).send('ERROR: ' + error.message + ' - FULL ERROR: ' + error.error);
+    });    
+});
+
+ /**
+  * POST Editar Eventos Pesca
+  */
+
+  app.post('/api/configeventospesca/Editar', cors(corsOptionsDelegate),function (req, res) {  
+    console.log('Node server has been invoked. Now calling Backend service API ...');
+    _getAccessToken()
+    .then((result) => {
+        console.log('Successfully fetched OAuth access token: ' +  result.accessToken.substring(0,16));
+        var sUrl = HOST + "/api/configeventospesca/Editar";
+        return _doQUERY(sUrl, result.accessToken, req.body, 'POST');
+    })
+    .then((result) => {
+        console.log('Successfully called OData service. Response body: ' + result.responseBody);
+        res.status(200).send(JSON.stringify(result.responseBody));
+    })
+    .catch((error) => {
+        console.log(error.message + ' Reason: ' + error.error);
+        res.status(500).send('ERROR: ' + error.message + ' - FULL ERROR: ' + error.error);
+    });    
+});
+
 // get
 app.get('/api/embarcacion/listaEmbarcacion', cors(corsOptionsDelegate),function (req, res) {  
     console.log('Node server has been invoked. Now calling Backend service API ...');
@@ -124,6 +168,10 @@ app.get('/api/embarcacion/listaEmbarcacion', cors(corsOptionsDelegate),function 
         res.status(500).send('ERROR: ' + error.message + ' - FULL ERROR: ' + error.error);
     });    
 });
+
+/**
+ * POST Precios de pesca
+ */
 
 app.post('/api/preciospesca/Mant', cors(corsOptionsDelegate),function (req, res) {  
     console.log('Node server has been invoked. Now calling Backend service API ...');
@@ -436,6 +484,27 @@ app.post('/api/General/Update_Table2/', cors(corsOptionsDelegate),function (req,
 });
 
 /**
+ * POST Update CAmp table 
+ */
+ app.post('/api/General/Update_Camp_Table/', cors(corsOptionsDelegate),function (req, res) {  
+    console.log('Node server has been invoked. Now calling Backend service API ...');
+    _getAccessToken()
+    .then((result) => {
+        console.log('Successfully fetched OAuth access token: ' +  result.accessToken.substring(0,16));
+        var sUrl = HOST + "/api/General/Update_Camp_Table/";
+        return _doQUERY(sUrl, result.accessToken, req.body, 'POST');
+    })
+    .then((result) => {
+        console.log('Successfully called OData service. Response body: ' + result.responseBody);
+        res.status(200).send(JSON.stringify(result.responseBody));
+    })
+    .catch((error) => {
+        console.log(error.message + ' Reason: ' + error.error);
+        res.status(500).send('ERROR: ' + error.message + ' - FULL ERROR: ' + error.error);
+    });    
+});
+
+/**
  * POST Consulta de Calas
  */
 app.post('/api/reportepesca/ConsultarCalas', cors(corsOptionsDelegate),function (req, res) {  
@@ -717,6 +786,69 @@ app.post('/api/embarcacion/BusquedasEmbarcacion/', cors(corsOptionsDelegate),fun
     .then((result) => {
         console.log('Successfully fetched OAuth access token: ' +  result.accessToken.substring(0,16));
         var sUrl = HOST + "/api/tolvas/registrotolvas_listar";
+        return _doQUERY(sUrl, result.accessToken, req.body, 'POST');
+    })
+    .then((result) => {
+        console.log('Successfully called OData service. Response body: ' + result.responseBody);
+        res.status(200).send(JSON.stringify(result.responseBody));
+    })
+    .catch((error) => {
+        console.log(error.message + ' Reason: ' + error.error);
+        res.status(500).send('ERROR: ' + error.message + ' - FULL ERROR: ' + error.error);
+    });
+});
+
+/**
+ * POST  Tolvas 
+ */
+ app.post('/api/tolvas/ingresodescargamanual_guardar', cors(corsOptionsDelegate),function (req, res) {  
+    console.log('Node server has been invoked. Now calling Backend service API ...');
+    _getAccessToken()
+    .then((result) => {
+        console.log('Successfully fetched OAuth access token: ' +  result.accessToken.substring(0,16));
+        var sUrl = HOST + "/api/tolvas/ingresodescargamanual_guardar";
+        return _doQUERY(sUrl, result.accessToken, req.body, 'POST');
+    })
+    .then((result) => {
+        console.log('Successfully called OData service. Response body: ' + result.responseBody);
+        res.status(200).send(JSON.stringify(result.responseBody));
+    })
+    .catch((error) => {
+        console.log(error.message + ' Reason: ' + error.error);
+        res.status(500).send('ERROR: ' + error.message + ' - FULL ERROR: ' + error.error);
+    });
+});
+
+/**
+ * POST  Tolvas 
+ */
+ app.post('/api/tolvas/pescacompetenciaradial', cors(corsOptionsDelegate),function (req, res) {  
+    console.log('Node server has been invoked. Now calling Backend service API ...');
+    _getAccessToken()
+    .then((result) => {
+        console.log('Successfully fetched OAuth access token: ' +  result.accessToken.substring(0,16));
+        var sUrl = HOST + "/api/tolvas/pescacompetenciaradial";
+        return _doQUERY(sUrl, result.accessToken, req.body, 'POST');
+    })
+    .then((result) => {
+        console.log('Successfully called OData service. Response body: ' + result.responseBody);
+        res.status(200).send(JSON.stringify(result.responseBody));
+    })
+    .catch((error) => {
+        console.log(error.message + ' Reason: ' + error.error);
+        res.status(500).send('ERROR: ' + error.message + ' - FULL ERROR: ' + error.error);
+    });
+});
+
+/**
+ * POST  Tolvas 
+ */
+ app.post('/api/tolvas/calculoderechopesca_listar', cors(corsOptionsDelegate),function (req, res) {  
+    console.log('Node server has been invoked. Now calling Backend service API ...');
+    _getAccessToken()
+    .then((result) => {
+        console.log('Successfully fetched OAuth access token: ' +  result.accessToken.substring(0,16));
+        var sUrl = HOST + "/api/tolvas/calculoderechopesca_listar";
         return _doQUERY(sUrl, result.accessToken, req.body, 'POST');
     })
     .then((result) => {
