@@ -845,12 +845,12 @@ app.post('/api/embarcacion/BusquedasEmbarcacion/', cors(corsOptionsDelegate),fun
 /**
  * POST  Tolvas 
  */
- app.post('/api/tolvas/calculoderechopesca_Guardar', cors(corsOptionsDelegate),function (req, res) {  
+ app.post('/api/tolvas/calculoderechopesca', cors(corsOptionsDelegate),function (req, res) {  
     console.log('Node server has been invoked. Now calling Backend service API ...');
     _getAccessToken()
     .then((result) => {
         console.log('Successfully fetched OAuth access token: ' +  result.accessToken.substring(0,16));
-        var sUrl = HOST + "/api/tolvas/calculoderechopesca_Guardar";
+        var sUrl = HOST + "/api/tolvas/calculoderechopesca";
         return _doQUERY(sUrl, result.accessToken, req.body, 'POST');
     })
     .then((result) => {
