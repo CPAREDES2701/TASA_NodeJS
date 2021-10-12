@@ -863,6 +863,141 @@ app.post('/api/embarcacion/BusquedasEmbarcacion/', cors(corsOptionsDelegate),fun
     });
 });
 
+/**
+ * @Eventos de pesca
+ */
+app.post('/api/eventospesca/ObtenerConfEventosPesca/', cors(corsOptionsDelegate),function (req, res) {  
+    console.log('Node server has been invoked. Now calling Backend service API ...');
+    _getAccessToken()
+    .then((result) => {
+        console.log('Successfully fetched OAuth access token: ' +  result.accessToken.substring(0,16));
+        var sUrl = HOST + "/api/eventospesca/ObtenerConfEventosPesca/";
+        return _doQUERY(sUrl, result.accessToken, req.body, 'POST');
+    })
+    .then((result) => {
+        console.log('Successfully called OData service. Response body: ' + result.responseBody);
+        res.status(200).send(JSON.stringify(result.responseBody));
+    })
+    .catch((error) => {
+        console.log(error.message + ' Reason: ' + error.error);
+        res.status(500).send('ERROR: ' + error.message + ' - FULL ERROR: ' + error.error);
+    });
+});
+
+
+app.post('/api/eventospesca/obtenerHoroEvento/', cors(corsOptionsDelegate),function (req, res) {  
+    console.log('Node server has been invoked. Now calling Backend service API ...');
+    _getAccessToken()
+    .then((result) => {
+        console.log('Successfully fetched OAuth access token: ' +  result.accessToken.substring(0,16));
+        var sUrl = HOST + "/api/eventospesca/obtenerHoroEvento/";
+        return _doQUERY(sUrl, result.accessToken, req.body, 'POST');
+    })
+    .then((result) => {
+        console.log('Successfully called OData service. Response body: ' + result.responseBody);
+        res.status(200).send(JSON.stringify(result.responseBody));
+    })
+    .catch((error) => {
+        console.log(error.message + ' Reason: ' + error.error);
+        res.status(500).send('ERROR: ' + error.message + ' - FULL ERROR: ' + error.error);
+    });
+});
+
+
+app.post('/api/valeviveres/Listar/', cors(corsOptionsDelegate),function (req, res) {  
+    console.log('Node server has been invoked. Now calling Backend service API ...');
+    _getAccessToken()
+    .then((result) => {
+        console.log('Successfully fetched OAuth access token: ' +  result.accessToken.substring(0,16));
+        var sUrl = HOST + "/api/valeviveres/Listar/";
+        return _doQUERY(sUrl, result.accessToken, req.body, 'POST');
+    })
+    .then((result) => {
+        console.log('Successfully called OData service. Response body: ' + result.responseBody);
+        res.status(200).send(JSON.stringify(result.responseBody));
+    })
+    .catch((error) => {
+        console.log(error.message + ' Reason: ' + error.error);
+        res.status(500).send('ERROR: ' + error.message + ' - FULL ERROR: ' + error.error);
+    });
+});
+
+
+app.post('/api/valeviveres/Guardar/', cors(corsOptionsDelegate),function (req, res) {  
+    console.log('Node server has been invoked. Now calling Backend service API ...');
+    _getAccessToken()
+    .then((result) => {
+        console.log('Successfully fetched OAuth access token: ' +  result.accessToken.substring(0,16));
+        var sUrl = HOST + "/api/valeviveres/Guardar/";
+        return _doQUERY(sUrl, result.accessToken, req.body, 'POST');
+    })
+    .then((result) => {
+        console.log('Successfully called OData service. Response body: ' + result.responseBody);
+        res.status(200).send(JSON.stringify(result.responseBody));
+    })
+    .catch((error) => {
+        console.log(error.message + ' Reason: ' + error.error);
+        res.status(500).send('ERROR: ' + error.message + ' - FULL ERROR: ' + error.error);
+    });
+});
+
+
+app.post('/api/valeviveres/DetalleImpresionViveres', cors(corsOptionsDelegate),function (req, res) {  
+    console.log('Node server has been invoked. Now calling Backend service API ...');
+    _getAccessToken()
+    .then((result) => {
+        console.log('Successfully fetched OAuth access token: ' +  result.accessToken.substring(0,16));
+        var sUrl = HOST + "/api/valeviveres/DetalleImpresionViveres";
+        return _doQUERY(sUrl, result.accessToken, req.body, 'POST');
+    })
+    .then((result) => {
+        console.log('Successfully called OData service. Response body: ' + result.responseBody);
+        res.status(200).send(JSON.stringify(result.responseBody));
+    })
+    .catch((error) => {
+        console.log(error.message + ' Reason: ' + error.error);
+        res.status(500).send('ERROR: ' + error.message + ' - FULL ERROR: ' + error.error);
+    });
+});
+
+//https://cf-nodejs-qas.cfapps.us10.hana.ondemand.com/api/analisiscombustible/Detalle
+app.post('/api/analisiscombustible/Detalle', cors(corsOptionsDelegate),function (req, res) {  
+    console.log('Node server has been invoked. Now calling Backend service API ...');
+    _getAccessToken()
+    .then((result) => {
+        console.log('Successfully fetched OAuth access token: ' +  result.accessToken.substring(0,16));
+        var sUrl = HOST + "/api/analisiscombustible/Detalle";
+        return _doQUERY(sUrl, result.accessToken, req.body, 'POST');
+    })
+    .then((result) => {
+        console.log('Successfully called OData service. Response body: ' + result.responseBody);
+        res.status(200).send(JSON.stringify(result.responseBody));
+    })
+    .catch((error) => {
+        console.log(error.message + ' Reason: ' + error.error);
+        res.status(500).send('ERROR: ' + error.message + ' - FULL ERROR: ' + error.error);
+    });
+});
+
+// https://cf-nodejs-qas.cfapps.us10.hana.ondemand.com/api/analisiscombustible/Listar
+app.post('/api/analisiscombustible/Listar', cors(corsOptionsDelegate),function (req, res) {  
+    console.log('Node server has been invoked. Now calling Backend service API ...');
+    _getAccessToken()
+    .then((result) => {
+        console.log('Successfully fetched OAuth access token: ' +  result.accessToken.substring(0,16));
+        var sUrl = HOST + "/api/analisiscombustible/Listar";
+        return _doQUERY(sUrl, result.accessToken, req.body, 'POST');
+    })
+    .then((result) => {
+        console.log('Successfully called OData service. Response body: ' + result.responseBody);
+        res.status(200).send(JSON.stringify(result.responseBody));
+    })
+    .catch((error) => {
+        console.log(error.message + ' Reason: ' + error.error);
+        res.status(500).send('ERROR: ' + error.message + ' - FULL ERROR: ' + error.error);
+    });
+});
+
 // the server
 const port = process.env.PORT || 3000;  // cloud foundry will set the PORT env after deploy
 app.listen(port, function () {
