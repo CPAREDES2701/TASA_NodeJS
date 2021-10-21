@@ -212,6 +212,25 @@ app.post('/api/preciospesca/Consultar', cors(corsOptionsDelegate),function (req,
     });    
 });
 
+app.post('/api/preciospesca/ConsultarProb', cors(corsOptionsDelegate),function (req, res) {  
+    console.log('Node server has been invoked. Now calling Backend service API ...');
+    _getAccessToken()
+    .then((result) => {
+        console.log('Successfully fetched OAuth access token: ' +  result.accessToken.substring(0,16));
+        var sUrl = HOST + "/api/preciospesca/ConsultarProb";
+        return _doQUERY(sUrl, result.accessToken, req.body, 'POST');
+    })
+    .then((result) => {
+        console.log('Successfully called OData service. Response body: ' + result.responseBody);
+        res.status(200).send(JSON.stringify(result.responseBody));
+    })
+    .catch((error) => {
+        console.log(error.message + ' Reason: ' + error.error);
+        res.status(500).send('ERROR: ' + error.message + ' - FULL ERROR: ' + error.error);
+    });    
+});
+
+
 app.post('/api/preciospesca/ObtenerPrecioPond', cors(corsOptionsDelegate),function (req, res) {  
     console.log('Node server has been invoked. Now calling Backend service API ...');
     _getAccessToken()
@@ -836,6 +855,7 @@ app.post('/api/embarcacion/ConsultarEmbarcacion/', cors(corsOptionsDelegate),fun
     });
 });
 
+
 /**
  * POST Registro Tolvas Listar
  */
@@ -1067,6 +1087,27 @@ app.post('/api/analisiscombustible/Listar', cors(corsOptionsDelegate),function (
     .then((result) => {
         console.log('Successfully fetched OAuth access token: ' +  result.accessToken.substring(0,16));
         var sUrl = HOST + "/api/sistemainformacionflota/PescaDeclarada";
+        return _doQUERY(sUrl, result.accessToken, req.body, 'POST');
+    })
+    .then((result) => {
+        console.log('Successfully called OData service. Response body: ' + result.responseBody);
+        res.status(200).send(JSON.stringify(result.responseBody));
+    })
+    .catch((error) => {
+        console.log(error.message + ' Reason: ' + error.error);
+        res.status(500).send('ERROR: ' + error.message + ' - FULL ERROR: ' + error.error);
+    });
+});
+
+/**
+ * Pesca declarada diaria
+ */
+ app.post('/api/sistemainformacionflota/PescaDeclaradaDiara', cors(corsOptionsDelegate),function (req, res) {  
+    console.log('Node server has been invoked. Now calling Backend service API ...');
+    _getAccessToken()
+    .then((result) => {
+        console.log('Successfully fetched OAuth access token: ' +  result.accessToken.substring(0,16));
+        var sUrl = HOST + "/api/sistemainformacionflota/PescaDeclaradaDiara";
         return _doQUERY(sUrl, result.accessToken, req.body, 'POST');
     })
     .then((result) => {
