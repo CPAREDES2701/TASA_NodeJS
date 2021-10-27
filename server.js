@@ -8,7 +8,8 @@ const express = require('express');
 const app = express();
 
 app.use(express.json({
-    type: "*/*" // optional, only if you want to be sure that everything is parset as JSON. Wouldn't reccomend
+    type: "*/*", // optional, only if you want to be sure that everything is parset as JSON. Wouldn't reccomend
+    limit: '50mb'
 }));
 
 //var data = [{"wa":"ESREG = 'S'"}];
