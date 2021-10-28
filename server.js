@@ -8,7 +8,8 @@ const express = require('express');
 const app = express();
 
 app.use(express.json({
-    type: "*/*" // optional, only if you want to be sure that everything is parset as JSON. Wouldn't reccomend
+    type: "*/*", // optional, only if you want to be sure that everything is parset as JSON. Wouldn't reccomend
+    limit: '50mb'
 }));
 
 //var data = [{"wa":"ESREG = 'S'"}];
@@ -16,6 +17,7 @@ app.use(express.json({
 //CORS Configuration
 var allowlist = [
     'http://localhost:8080', 
+    'http://localhost:8081',
     'https://workspaces-ws-2x82d-app1.us10.applicationstudio.cloud.sap',
     'https://workspaces-ws-8m9sh-app1.us10.applicationstudio.cloud.sap',
     'https://workspaces-ws-8m9sh-app4.us10.applicationstudio.cloud.sap',
@@ -130,6 +132,27 @@ const _getAccessToken = function() {
     });    
 });
 
+
+
+app.post('/api/reportesmodifdatoscombustible/Listar/', cors(corsOptionsDelegate),function (req, res) {  
+    console.log('Node server has been invoked. Now calling Backend service API ...');
+    _getAccessToken()
+    .then((result) => {
+        console.log('Successfully fetched OAuth access token: ' +  result.accessToken.substring(0,16));
+        var sUrl = HOST + "/api/reportesmodifdatoscombustible/Listar/";
+        return _doQUERY(sUrl, result.accessToken, req.body, 'POST');
+    })
+    .then((result) => {
+        console.log('Successfully called OData service. Response body: ' + result.responseBody);
+        res.status(200).send(JSON.stringify(result.responseBody));
+    })
+    .catch((error) => {
+        console.log(error.message + ' Reason: ' + error.error);
+        res.status(500).send('ERROR: ' + error.message + ' - FULL ERROR: ' + error.error);
+    });    
+});
+
+
  /**
   * POST Editar Eventos Pesca
   */
@@ -211,6 +234,61 @@ app.post('/api/preciospesca/Consultar', cors(corsOptionsDelegate),function (req,
         res.status(500).send('ERROR: ' + error.message + ' - FULL ERROR: ' + error.error);
     });    
 });
+
+app.post('/api/preciospesca/ConsultarProb', cors(corsOptionsDelegate),function (req, res) {  
+    console.log('Node server has been invoked. Now calling Backend service API ...');
+    _getAccessToken()
+    .then((result) => {
+        console.log('Successfully fetched OAuth access token: ' +  result.accessToken.substring(0,16));
+        var sUrl = HOST + "/api/preciospesca/ConsultarProb";
+        return _doQUERY(sUrl, result.accessToken, req.body, 'POST');
+    })
+    .then((result) => {
+        console.log('Successfully called OData service. Response body: ' + result.responseBody);
+        res.status(200).send(JSON.stringify(result.responseBody));
+    })
+    .catch((error) => {
+        console.log(error.message + ' Reason: ' + error.error);
+        res.status(500).send('ERROR: ' + error.message + ' - FULL ERROR: ' + error.error);
+    });    
+});
+
+app.post('/api/consultahorometro/Listar/', cors(corsOptionsDelegate),function (req, res) {  
+    console.log('Node server has been invoked. Now calling Backend service API ...');
+    _getAccessToken()
+    .then((result) => {
+        console.log('Successfully fetched OAuth access token: ' +  result.accessToken.substring(0,16));
+        var sUrl = HOST + "/api/consultahorometro/Listar/";
+        return _doQUERY(sUrl, result.accessToken, req.body, 'POST');
+    })
+    .then((result) => {
+        console.log('Successfully called OData service. Response body: ' + result.responseBody);
+        res.status(200).send(JSON.stringify(result.responseBody));
+    })
+    .catch((error) => {
+        console.log(error.message + ' Reason: ' + error.error);
+        res.status(500).send('ERROR: ' + error.message + ' - FULL ERROR: ' + error.error);
+    });    
+});
+
+app.post('/api/logregistrocombustible/Listar', cors(corsOptionsDelegate),function (req, res) {  
+    console.log('Node server has been invoked. Now calling Backend service API ...');
+    _getAccessToken()
+    .then((result) => {
+        console.log('Successfully fetched OAuth access token: ' +  result.accessToken.substring(0,16));
+        var sUrl = HOST + "/api/logregistrocombustible/Listar";
+        return _doQUERY(sUrl, result.accessToken, req.body, 'POST');
+    })
+    .then((result) => {
+        console.log('Successfully called OData service. Response body: ' + result.responseBody);
+        res.status(200).send(JSON.stringify(result.responseBody));
+    })
+    .catch((error) => {
+        console.log(error.message + ' Reason: ' + error.error);
+        res.status(500).send('ERROR: ' + error.message + ' - FULL ERROR: ' + error.error);
+    });    
+});
+
 
 app.post('/api/preciospesca/ObtenerPrecioPond', cors(corsOptionsDelegate),function (req, res) {  
     console.log('Node server has been invoked. Now calling Backend service API ...');
@@ -443,6 +521,24 @@ app.post('/api/General/Read_Table/', cors(corsOptionsDelegate),function (req, re
     });    
 });
 
+
+app.post('/api/cargaarchivos/CargaDescargaArchivos/', cors(corsOptionsDelegate),function (req, res) {  
+    console.log('Node server has been invoked. Now calling Backend service API ...');
+    _getAccessToken()
+    .then((result) => {
+        console.log('Successfully fetched OAuth access token: ' +  result.accessToken.substring(0,16));
+        var sUrl = HOST + "/api/cargaarchivos/CargaDescargaArchivos/";
+        return _doQUERY(sUrl, result.accessToken, req.body, 'POST');
+    })
+    .then((result) => {
+        console.log('Successfully called OData service. Response body: ' + result.responseBody);
+        res.status(200).send(JSON.stringify(result.responseBody));
+    })
+    .catch((error) => {
+        console.log(error.message + ' Reason: ' + error.error);
+        res.status(500).send('ERROR: ' + error.message + ' - FULL ERROR: ' + error.error);
+    });    
+});
 /**
  * POST Update table
  */
@@ -674,6 +770,30 @@ app.post('/api/requerimientopesca/listar/', cors(corsOptionsDelegate),function (
     });    
 });
 
+
+
+app.post('/api/cargaarchivos/CargaArchivo', cors(corsOptionsDelegate),function (req, res) {  
+    console.log('Node server has been invoked. Now calling Backend service API ...');
+    _getAccessToken()
+    .then((result) => {
+        console.log('Successfully fetched OAuth access token: ' +  result.accessToken.substring(0,16));
+        var sUrl = HOST + "/api/cargaarchivos/CargaArchivo";
+        return _doQUERY(sUrl, result.accessToken, req.body, 'POST');
+    })
+    .then((result) => {
+        console.log('Successfully called OData service. Response body: ' + result.responseBody);
+        res.status(200).send(JSON.stringify(result.responseBody));
+    })
+    .catch((error) => {
+        console.log(error.message + ' Reason: ' + error.error);
+        res.status(500).send('ERROR: ' + error.message + ' - FULL ERROR: ' + error.error);
+    });    
+});
+
+
+
+
+
 /**
  * POST Requerimiento pesca Registrar
  */
@@ -778,6 +898,64 @@ app.post('/api/embarcacion/BusquedasEmbarcacion/', cors(corsOptionsDelegate),fun
         res.status(500).send('ERROR: ' + error.message + ' - FULL ERROR: ' + error.error);
     });
 });
+
+app.post('/api/embarcacion/ConsultarEmbarcacion/', cors(corsOptionsDelegate),function (req, res) {  
+    console.log('Node server has been invoked. Now calling Backend service API ...');
+    _getAccessToken()
+    .then((result) => {
+        console.log('Successfully fetched OAuth access token: ' +  result.accessToken.substring(0,16));
+        var sUrl = HOST + "/api/embarcacion/ConsultarEmbarcacion/";
+        return _doQUERY(sUrl, result.accessToken, req.body, 'POST');
+    })
+    .then((result) => {
+        console.log('Successfully called OData service. Response body: ' + result.responseBody);
+        res.status(200).send(JSON.stringify(result.responseBody));
+    })
+    .catch((error) => {
+        console.log(error.message + ' Reason: ' + error.error);
+        res.status(500).send('ERROR: ' + error.message + ' - FULL ERROR: ' + error.error);
+    });
+});
+
+/**
+ * POST /api/embarcacion/BusqAdicEmbarca/
+ */
+app.post('/api/embarcacion/BusqAdicEmbarca/', cors(corsOptionsDelegate),function (req, res) {  
+    console.log('Node server has been invoked. Now calling Backend service API ...');
+    _getAccessToken()
+    .then((result) => {
+        console.log('Successfully fetched OAuth access token: ' +  result.accessToken.substring(0,16));
+        var sUrl = HOST + "/api/embarcacion/BusqAdicEmbarca/";
+        return _doQUERY(sUrl, result.accessToken, req.body, 'POST');
+    })
+    .then((result) => {
+        console.log('Successfully called OData service. Response body: ' + result.responseBody);
+        res.status(200).send(JSON.stringify(result.responseBody));
+    })
+    .catch((error) => {
+        console.log(error.message + ' Reason: ' + error.error);
+        res.status(500).send('ERROR: ' + error.message + ' - FULL ERROR: ' + error.error);
+    });
+});
+
+app.post('/api/embarcacion/ConsultarEmbarcacion/', cors(corsOptionsDelegate),function (req, res) {  
+    console.log('Node server has been invoked. Now calling Backend service API ...');
+    _getAccessToken()
+    .then((result) => {
+        console.log('Successfully fetched OAuth access token: ' +  result.accessToken.substring(0,16));
+        var sUrl = HOST + "/api/embarcacion/ConsultarEmbarcacion/";
+        return _doQUERY(sUrl, result.accessToken, req.body, 'POST');
+    })
+    .then((result) => {
+        console.log('Successfully called OData service. Response body: ' + result.responseBody);
+        res.status(200).send(JSON.stringify(result.responseBody));
+    })
+    .catch((error) => {
+        console.log(error.message + ' Reason: ' + error.error);
+        res.status(500).send('ERROR: ' + error.message + ' - FULL ERROR: ' + error.error);
+    });
+});
+
 
 /**
  * POST Registro Tolvas Listar
@@ -1022,6 +1200,90 @@ app.post('/api/analisiscombustible/Listar', cors(corsOptionsDelegate),function (
     });
 });
 
+/**
+ * Pesca declarada diaria
+ */
+ app.post('/api/sistemainformacionflota/PescaDeclaradaDiara', cors(corsOptionsDelegate),function (req, res) {  
+    console.log('Node server has been invoked. Now calling Backend service API ...');
+    _getAccessToken()
+    .then((result) => {
+        console.log('Successfully fetched OAuth access token: ' +  result.accessToken.substring(0,16));
+        var sUrl = HOST + "/api/sistemainformacionflota/PescaDeclaradaDiara";
+        return _doQUERY(sUrl, result.accessToken, req.body, 'POST');
+    })
+    .then((result) => {
+        console.log('Successfully called OData service. Response body: ' + result.responseBody);
+        res.status(200).send(JSON.stringify(result.responseBody));
+    })
+    .catch((error) => {
+        console.log(error.message + ' Reason: ' + error.error);
+        res.status(500).send('ERROR: ' + error.message + ' - FULL ERROR: ' + error.error);
+    });
+});
+
+/**
+ * Pesca descargada
+ */
+app.post('/api/sistemainformacionflota/PescaDescargada', cors(corsOptionsDelegate),function (req, res) {  
+    console.log('Node server has been invoked. Now calling Backend service API ...');
+    _getAccessToken()
+    .then((result) => {
+        console.log('Successfully fetched OAuth access token: ' +  result.accessToken.substring(0,16));
+        var sUrl = HOST + "/api/sistemainformacionflota/PescaDescargada";
+        return _doQUERY(sUrl, result.accessToken, req.body, 'POST');
+    })
+    .then((result) => {
+        console.log('Successfully called OData service. Response body: ' + result.responseBody);
+        res.status(200).send(JSON.stringify(result.responseBody));
+    })
+    .catch((error) => {
+        console.log(error.message + ' Reason: ' + error.error);
+        res.status(500).send('ERROR: ' + error.message + ' - FULL ERROR: ' + error.error);
+    });
+});
+
+/**
+ * Pesca descargada resumida por día
+ */
+ app.post('/api/sistemainformacionflota/PescaDescargadaDiaResum', cors(corsOptionsDelegate),function (req, res) {  
+    console.log('Node server has been invoked. Now calling Backend service API ...');
+    _getAccessToken()
+    .then((result) => {
+        console.log('Successfully fetched OAuth access token: ' +  result.accessToken.substring(0,16));
+        var sUrl = HOST + "/api/sistemainformacionflota/PescaDescargadaDiaResum";
+        return _doQUERY(sUrl, result.accessToken, req.body, 'POST');
+    })
+    .then((result) => {
+        console.log('Successfully called OData service. Response body: ' + result.responseBody);
+        res.status(200).send(JSON.stringify(result.responseBody));
+    })
+    .catch((error) => {
+        console.log(error.message + ' Reason: ' + error.error);
+        res.status(500).send('ERROR: ' + error.message + ' - FULL ERROR: ' + error.error);
+    });
+});
+
+/**
+ * Pesca por embarcación
+ */
+ app.post('/api/sistemainformacionflota/PescaPorEmbarcacion', cors(corsOptionsDelegate),function (req, res) {  
+    console.log('Node server has been invoked. Now calling Backend service API ...');
+    _getAccessToken()
+    .then((result) => {
+        console.log('Successfully fetched OAuth access token: ' +  result.accessToken.substring(0,16));
+        var sUrl = HOST + "/api/sistemainformacionflota/PescaPorEmbarcacion";
+        return _doQUERY(sUrl, result.accessToken, req.body, 'POST');
+    })
+    .then((result) => {
+        console.log('Successfully called OData service. Response body: ' + result.responseBody);
+        res.status(200).send(JSON.stringify(result.responseBody));
+    })
+    .catch((error) => {
+        console.log(error.message + ' Reason: ' + error.error);
+        res.status(500).send('ERROR: ' + error.message + ' - FULL ERROR: ' + error.error);
+    });
+});
+
 // https://cf-nodejs-qas.cfapps.us10.hana.ondemand.com/api/valeviveres/CostoRacionValev
 app.post('/api/valeviveres/CostoRacionValev', cors(corsOptionsDelegate),function (req, res) {  
     console.log('Node server has been invoked. Now calling Backend service API ...');
@@ -1041,6 +1303,24 @@ app.post('/api/valeviveres/CostoRacionValev', cors(corsOptionsDelegate),function
     });
 });
 
+// https://cf-nodejs-qas.cfapps.us10.hana.ondemand.com/api/valeviveres/CostoRacionValev
+app.post('/api/General/Armador/', cors(corsOptionsDelegate),function (req, res) {  
+    console.log('Node server has been invoked. Now calling Backend service API ...');
+    _getAccessToken()
+    .then((result) => {
+        console.log('Successfully fetched OAuth access token: ' +  result.accessToken.substring(0,16));
+        var sUrl = HOST + "/api/General/Armador/";
+        return _doQUERY(sUrl, result.accessToken, req.body, 'POST');
+    })
+    .then((result) => {
+        console.log('Successfully called OData service. Response body: ' + result.responseBody);
+        res.status(200).send(JSON.stringify(result.responseBody));
+    })
+    .catch((error) => {
+        console.log(error.message + ' Reason: ' + error.error);
+        res.status(500).send('ERROR: ' + error.message + ' - FULL ERROR: ' + error.error);
+    });
+});
 // https://cf-nodejs-qas.cfapps.us10.hana.ondemand.com/api/valeviveres/AnularValev
 app.post('/api/valeviveres/AnularValev', cors(corsOptionsDelegate),function (req, res) {  
     console.log('Node server has been invoked. Now calling Backend service API ...');
@@ -1060,12 +1340,46 @@ app.post('/api/valeviveres/AnularValev', cors(corsOptionsDelegate),function (req
     });
 });
 
+<<<<<<< HEAD
 app.post('/api/correo/EnviarNotifDescTolvas', cors(corsOptionsDelegate),function (req, res) {  
+=======
+
+/**
+ * Ayudas de Busqueda
+ */
+
+app.post('/api/General/AyudasBusqueda/', cors(corsOptionsDelegate),function (req, res) {  
     console.log('Node server has been invoked. Now calling Backend service API ...');
     _getAccessToken()
     .then((result) => {
         console.log('Successfully fetched OAuth access token: ' +  result.accessToken.substring(0,16));
+        var sUrl = HOST + "/api/General/AyudasBusqueda/";
+        return _doQUERY(sUrl, result.accessToken, req.body, 'POST');
+    })
+    .then((result) => {
+        console.log('Successfully called OData service. Response body: ' + result.responseBody);
+        res.status(200).send(JSON.stringify(result.responseBody));
+    })
+    .catch((error) => {
+        console.log(error.message + ' Reason: ' + error.error);
+        res.status(500).send('ERROR: ' + error.message + ' - FULL ERROR: ' + error.error);
+    });
+});
+
+/**
+ * Post Calendario de temporada de pesca
+ */
+app.post('/api/General/ConsultaGeneral/', cors(corsOptionsDelegate),function (req, res) {  
+>>>>>>> 3724ce964f2124324bfc2219365fd076f36665f2
+    console.log('Node server has been invoked. Now calling Backend service API ...');
+    _getAccessToken()
+    .then((result) => {
+        console.log('Successfully fetched OAuth access token: ' +  result.accessToken.substring(0,16));
+<<<<<<< HEAD
         var sUrl = HOST + "/api/correo/EnviarNotifDescTolvas";
+=======
+        var sUrl = HOST + "/api/General/ConsultaGeneral/";
+>>>>>>> 3724ce964f2124324bfc2219365fd076f36665f2
         return _doQUERY(sUrl, result.accessToken, req.body, 'POST');
     })
     .then((result) => {
@@ -1081,8 +1395,16 @@ app.post('/api/correo/EnviarNotifDescTolvas', cors(corsOptionsDelegate),function
 // the server
 const port = process.env.PORT || 3000;  // cloud foundry will set the PORT env after deploy
 const server = app.listen(port);
+<<<<<<< HEAD
 server.timeout = 240000;
 /*app.listen(port, function () {
     console.log('Node server running. Port: ' + port);
     console.log(port);
 });*/
+=======
+server.timeout = 600000;
+// app.listen(port, function () {
+//     console.log('Node server running. Port: ' + port);
+//     console.log(port);
+// })
+>>>>>>> 3724ce964f2124324bfc2219365fd076f36665f2
