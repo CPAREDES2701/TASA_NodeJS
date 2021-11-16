@@ -18,6 +18,7 @@ app.use(express.json({
 var allowlist = [
     'http://localhost:8080', 
     'http://localhost:8081',
+    'http://localhost:8082',
     'https://workspaces-ws-2x82d-app1.us10.applicationstudio.cloud.sap',
     'https://workspaces-ws-8m9sh-app1.us10.applicationstudio.cloud.sap',
     'https://workspaces-ws-8m9sh-app4.us10.applicationstudio.cloud.sap',
