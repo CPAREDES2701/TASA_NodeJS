@@ -2014,12 +2014,12 @@ app.post('/api/embarcacion/consultarHorometro/', cors(corsOptionsDelegate),funct
 /**
  * Reabrir marea
  */
- app.post('/api/embarcacion/reabrirMarea', cors(corsOptionsDelegate),function (req, res) {  
+ app.post('/api/embarcacion/reabrirMarea/', cors(corsOptionsDelegate),function (req, res) {  
     console.log('Node server has been invoked. Now calling Backend service API ...');
     _getAccessToken()
     .then((result) => {
         console.log('Successfully fetched OAuth access token: ' +  result.accessToken.substring(0,16));
-        var sUrl = HOST + "/api/embarcacion/reabrirMarea";
+        var sUrl = HOST + "/api/embarcacion/reabrirMarea/";
         return _doQUERY(sUrl, result.accessToken, req.body, 'POST');
     })
     .then((result) => {
@@ -2035,12 +2035,12 @@ app.post('/api/embarcacion/consultarHorometro/', cors(corsOptionsDelegate),funct
 /**
  * Anular marea
  */
- app.post('/api/embarcacion/anularMarea', cors(corsOptionsDelegate),function (req, res) {  
+ app.post('/api/embarcacion/anularMarea/', cors(corsOptionsDelegate),function (req, res) {  
     console.log('Node server has been invoked. Now calling Backend service API ...');
     _getAccessToken()
     .then((result) => {
         console.log('Successfully fetched OAuth access token: ' +  result.accessToken.substring(0,16));
-        var sUrl = HOST + "/api/embarcacion/anularMarea";
+        var sUrl = HOST + "/api/embarcacion/anularMarea/";
         return _doQUERY(sUrl, result.accessToken, req.body, 'POST');
     })
     .then((result) => {
