@@ -1792,12 +1792,12 @@ app.post('/api/sistemainformacionflota/PescaDescargada', cors(corsOptionsDelegat
 /**
  * Reabrir marea
  */
- app.post('/api/gestionpesca/reabrir-marea', cors(corsOptionsDelegate),function (req, res) {  
+ app.post('/api/gestionpesca/reabrirMarea', cors(corsOptionsDelegate),function (req, res) {  
     console.log('Node server has been invoked. Now calling Backend service API ...');
     _getAccessToken()
     .then((result) => {
         console.log('Successfully fetched OAuth access token: ' +  result.accessToken.substring(0,16));
-        var sUrl = HOST + "/api/gestionpesca/reabrir-marea";
+        var sUrl = HOST + "/api/gestionpesca/reabrirMarea";
         return _doQUERY(sUrl, result.accessToken, req.body, 'POST');
     })
     .then((result) => {
@@ -1813,12 +1813,12 @@ app.post('/api/sistemainformacionflota/PescaDescargada', cors(corsOptionsDelegat
 /**
  * Anular marea
  */
- app.post('/api/gestionpesca/anular-marea', cors(corsOptionsDelegate),function (req, res) {  
+ app.post('/api/gestionpesca/anularMarea', cors(corsOptionsDelegate),function (req, res) {  
     console.log('Node server has been invoked. Now calling Backend service API ...');
     _getAccessToken()
     .then((result) => {
         console.log('Successfully fetched OAuth access token: ' +  result.accessToken.substring(0,16));
-        var sUrl = HOST + "/api/gestionpesca/anular-marea";
+        var sUrl = HOST + "/api/gestionpesca/anularMarea";
         return _doQUERY(sUrl, result.accessToken, req.body, 'POST');
     })
     .then((result) => {
