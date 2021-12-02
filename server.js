@@ -857,12 +857,12 @@ app.post('/api/cargaarchivos/CargaDescargaArchivos/', cors(corsOptionsDelegate),
 /**
  * POST carga dinamica de archivos (embarcaciones y cuotas armadores)
  */
- app.post('/api/cargaarchivos/CargaDescargaArchivos/', cors(corsOptionsDelegate),function (req, res) {  
+ app.post('/api/cargaarchivos/CargaDinamicaArchivos/', cors(corsOptionsDelegate),function (req, res) {  
     console.log('Node server has been invoked. Now calling Backend service API ...');
     _getAccessToken()
     .then((result) => {
         console.log('Successfully fetched OAuth access token: ' +  result.accessToken.substring(0,16));
-        var sUrl = HOST + "/api/cargaarchivos/CargaDescargaArchivos/";
+        var sUrl = HOST + "/api/cargaarchivos/CargaDinamicaArchivos/";
         return _doQUERY(sUrl, result.accessToken, req.body, 'POST');
     })
     .then((result) => {
