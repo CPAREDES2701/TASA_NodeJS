@@ -286,7 +286,7 @@ app.post('/api/reportesmodifdatoscombustible/Listar/', cors(corsOptionsDelegate)
     _getAccessToken()
     .then((result) => {
         console.log('Successfully fetched OAuth access token: ' +  result.accessToken.substring(0,16));
-        var sUrl = HOST + "/api/configeventospesca/Editar";
+        var sUrl = HOST + "/api/configeventospesca/Editar/";
         return _doQUERY(sUrl, result.accessToken, req.body, 'POST');
     })
     .then((result) => {
