@@ -61,6 +61,8 @@ if (XSUAA_ZONEID == "tasaqas") {
     HOST = 'https://flotabackendqas.cfapps.us10.hana.ondemand.com';
 }
 
+var HOST2 = 'https://current-user-qas.cfapps.us10.hana.ondemand.com/';
+
 //const HOST = 'https://flotabackendqas.cfapps.us10.hana.ondemand.com';
 
 const _getAccessToken = function() {
@@ -828,6 +830,7 @@ app.get('/api/embarcacion/ObtenerFlota', cors(corsOptionsDelegate),function (req
     _getAccessToken()
     .then((result) => {
         console.log('Successfully fetched OAuth access token: ' +  result.accessToken.substring(0,16));
+        console.log('TOKEN: ', result.accessToken);
         var sUrl = HOST + "/api/embarcacion/ObtenerFlota?user=" + req.query.usuario;
         return _doQUERY(sUrl, result.accessToken, null, 'GET');
     })
@@ -2382,6 +2385,24 @@ app.post('/api/embarcacion/AnularVenta/', cors(corsOptionsDelegate),function (re
     .then((result) => {
         console.log('Successfully fetched OAuth access token: ' +  result.accessToken.substring(0,16));
         var sUrl = HOST + "/api/embarcacion/AnularVenta/";
+        return _doQUERY(sUrl, result.accessToken, req.body, 'POST');
+    })
+    .then((result) => {
+        console.log('Successfully called OData service. Response body: ' + result.responseBody);
+        res.status(200).send(JSON.stringify(result.responseBody));
+    })
+    .catch((error) => {
+        console.log(error.message + ' Reason: ' + error.error);
+        res.status(500).send('ERROR: ' + error.message + ' - FULL ERROR: ' + error.error);
+    });
+});
+
+app.get('/getuserinfo', cors(corsOptionsDelegate),function (req, res) {  
+    console.log('Node server has been invoked. Now calling Backend service API ...');
+    _getAccessToken()
+    .then((result) => {
+        console.log('Successfully fetched OAuth access token: ' +  result.accessToken.substring(0,16));
+        var sUrl = HOST2 + "/getuserinfo";
         return _doQUERY(sUrl, result.accessToken, req.body, 'POST');
     })
     .then((result) => {
