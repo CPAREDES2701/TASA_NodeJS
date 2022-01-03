@@ -30,6 +30,7 @@ var allowlist = [
     'http://localhost:8080',
     'http://localhost:8081',
     'http://localhost:8082',
+    'https://tasaqas.launchpad.cfapps.us10.hana.ondemand.com/9acc820a-22dc-4d66-8d69-bed5b2789d3c.AyudasBusqueda',
     'https://workspaces-ws-2x82d-app1.us10.applicationstudio.cloud.sap',
     'https://workspaces-ws-8m9sh-app1.us10.applicationstudio.cloud.sap',
     'https://workspaces-ws-8m9sh-app4.us10.applicationstudio.cloud.sap',
