@@ -6,6 +6,17 @@ var cors = require('cors');
 var bodyParser = require('body-parser');
 const express = require('express');
 const app = express();
+const jwtDecode = require('jwt-decode');
+var approuter = require('@sap/approuter');
+var ar = new approuter();
+/*var xsenv = require('@sap/xsenv');
+var passport = require('passport');
+var JWTStrategy = require('@sap/xssec').JWTStrategy;
+
+var services = xsenv.getServices({ uaa: { tag: "xsuaa" } });
+passport.use(new JWTStrategy(services.uaa));
+app.use(passport.initialize());
+app.use(passport.authenticate('JWT', { session: false }));*/
 
 app.use(express.json({
     type: "*/*", // optional, only if you want to be sure that everything is parset as JSON. Wouldn't reccomend
@@ -36,7 +47,8 @@ var allowlist = [
     'https://workspaces-ws-57bg6-app5.us10.applicationstudio.cloud.sap',
     'https://workspaces-ws-wqm64-app1.us10.applicationstudio.cloud.sap',
     'https://workspaces-ws-qdslk-app1.us10.applicationstudio.cloud.sap',
-    'https://tasaqas.launchpad.cfapps.us10.hana.ondemand.com'             // launchpad 
+    'https://tasaqas.launchpad.cfapps.us10.hana.ondemand.com',             // launchpad 
+    'https://tasadev.launchpad.cfapps.us10.hana.ondemand.com'
 ];
 var corsOptionsDelegate = function (req, callback) {
   var corsOptions;
@@ -2496,20 +2508,39 @@ app.post('/api/embarcacion/AnularVenta/', cors(corsOptionsDelegate),function (re
 app.get('/getuserinfo', cors(corsOptionsDelegate),function (req, res) {  
     console.log('Node server has been invoked. Now calling Backend service API ...');
     _getAccessToken()
-    .then((result) => {
+    /*.then((result) => {
         console.log('Successfully fetched OAuth access token: ' +  result.accessToken.substring(0,16));
         var sUrl = HOST2 + "/getuserinfo";
         return _doQUERY(sUrl, result.accessToken, req.body, 'POST');
-    })
+    })*/
     .then((result) => {
-        console.log('Successfully called OData service. Response body: ' + result.responseBody);
-        res.status(200).send(JSON.stringify(result.responseBody));
+        //console.log('Successfully called OData service. Response body: ' + result.responseBody);
+        
+        var decodedJWTToken = jwtDecode(result.accessToken);
+        //var token = "eyJhbGciOiJSUzI1NiIsImprdSI6Imh0dHBzOi8vdGFzYXFhcy5hdXRoZW50aWNhdGlvbi51czEwLmhhbmEub25kZW1hbmQuY29tL3Rva2VuX2tleXMiLCJraWQiOiJkZWZhdWx0LWp3dC1rZXktMTgyMzc4NDkzNSIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI5MWE4M2NkZGE5YWY0MGY0YWFlYTIyNTA0MjMxZTA3YyIsImV4dF9hdHRyIjp7ImVuaGFuY2VyIjoiWFNVQUEiLCJzdWJhY2NvdW50aWQiOiJkNmUwNDU2NC1mZmNjLTQ0MzgtYmU3ZS0xMDE0OGE2OTI1OTIiLCJ6ZG4iOiJ0YXNhcWFzIn0sInN1YiI6InNiLWZsb3RhLWpjbyF0MzE3MjUiLCJhdXRob3JpdGllcyI6WyJ1YWEucmVzb3VyY2UiXSwic2NvcGUiOlsidWFhLnJlc291cmNlIl0sImNsaWVudF9pZCI6InNiLWZsb3RhLWpjbyF0MzE3MjUiLCJjaWQiOiJzYi1mbG90YS1qY28hdDMxNzI1IiwiYXpwIjoic2ItZmxvdGEtamNvIXQzMTcyNSIsImdyYW50X3R5cGUiOiJjbGllbnRfY3JlZGVudGlhbHMiLCJyZXZfc2lnIjoiNTFmY2RjMmEiLCJpYXQiOjE2NDA4NzI4MDYsImV4cCI6MTY0MDkxNjAwNiwiaXNzIjoiaHR0cHM6Ly90YXNhcWFzLmF1dGhlbnRpY2F0aW9uLnVzMTAuaGFuYS5vbmRlbWFuZC5jb20vb2F1dGgvdG9rZW4iLCJ6aWQiOiJkNmUwNDU2NC1mZmNjLTQ0MzgtYmU3ZS0xMDE0OGE2OTI1OTIiLCJhdWQiOlsidWFhIiwic2ItZmxvdGEtamNvIXQzMTcyNSJdfQ.iB4PUyndVezuwrFuPZjKAM0JtmG40wThkeVmAeUAn6Bq7d8Iyd5KszKWkkd_g8J1gNM9E1cvN7GjVz9vf1JQDmLlhPmPQT7A3rYdsT-_kpOVyqrOXmasEQ963WMtbJSVYyrCqBMqFv8-PI6tF3uZ76BOoidDhe8HR7JJqIXf-wfZee7byJH8nJLNqKn-7ap6ctfTVB3RAiz0_CfKSLRC_ZbD0lDj6q0kiCPNHWfxQYMCpZ3of3lofogbdeOvr0y4Q_4kvghWi5uCa62qFFBWYuD7Eadil2Ji0H3ewotLwpCaqHmRr1h-sBmJL4xadF2cd80ZE7FuSH_sahQ57-uH-A";
+        var decodedJWTToken = jwtDecode(token);
+        res.status(200).send(JSON.stringify({
+			UserDetails: decodedJWTToken
+		}));
     })
     .catch((error) => {
         console.log(error.message + ' Reason: ' + error.error);
         res.status(500).send('ERROR: ' + error.message + ' - FULL ERROR: ' + error.error);
     });
 });
+
+/*ar.beforeRequestHandler.use('/jwtdecode', function (req, res, next) {
+	if (!req.user) {
+	  res.statusCode = 403;
+	  res.end(`Missing JWT Token`);
+	} else {
+	  res.statusCode = 200;
+	  res.end(`${JSON.stringify(jwtDecode(req.user.token.accessToken))}`);
+	} 
+});
+ar.start();*/
+
+
 
 // the server
 const port = process.env.PORT || 3000;  // cloud foundry will set the PORT env after deploy
