@@ -49,7 +49,12 @@ var allowlist = [
     'https://workspaces-ws-wqm64-app1.us10.applicationstudio.cloud.sap',
     'https://workspaces-ws-qdslk-app1.us10.applicationstudio.cloud.sap',
     'https://tasaqas.launchpad.cfapps.us10.hana.ondemand.com',             // launchpad 
-    'https://tasadev.launchpad.cfapps.us10.hana.ondemand.com'
+    'https://tasadev.launchpad.cfapps.us10.hana.ondemand.com',
+    'https://workspaces-ws-ndjqc-app1.us10.applicationstudio.cloud.sap',  //Ruben
+    'https://workspaces-ws-ndjqc-app3.us10.applicationstudio.cloud.sap',  //Ruben
+    'https://workspaces-ws-cd8st-app1.us10.applicationstudio.cloud.sap',  //Ruben
+    'https://workspaces-ws-ndjqc-app2.us10.applicationstudio.cloud.sap',  //Ruben
+    'https://workspaces-ws-ndjqc-app5.us10.applicationstudio.cloud.sap'   //Ruben
 ];
 var corsOptionsDelegate = function (req, callback) {
   var corsOptions;
@@ -125,6 +130,8 @@ const _getAccessToken = function() {
         });
     });
  };
+
+
 
  //TRIPULANTES
  app.post('/api/tripulantes/PDFReporteObsTripu', cors(corsOptionsDelegate),function (req, res) {  
@@ -334,6 +341,27 @@ app.get('/api/embarcacion/listaEmbarcacion', cors(corsOptionsDelegate),function 
 });
 
 /**
+ * POST Ayuda de búsqueda de embarcaciones
+ */
+ app.post('/api/embarcacion/AyudaBusqueda', cors(corsOptionsDelegate),function (req, res) {  
+    console.log('Node server has been invoked. Now calling Backend service API ...');
+    _getAccessToken()
+    .then((result) => {
+        console.log('Successfully fetched OAuth access token: ' +  result.accessToken.substring(0,16));
+        var sUrl = HOST + "/api/embarcacion/AyudaBusqueda/";
+        return _doQUERY(sUrl, result.accessToken, req.body, 'POST');
+    })
+    .then((result) => {
+        console.log('Successfully called OData service. Response body: ' + result.responseBody);
+        res.status(200).send(JSON.stringify(result.responseBody));
+    })
+    .catch((error) => {
+        console.log(error.message + ' Reason: ' + error.error);
+        res.status(500).send('ERROR: ' + error.message + ' - FULL ERROR: ' + error.error);
+    });    
+});
+
+/**
  * POST Precios de pesca
  */
 
@@ -466,7 +494,41 @@ app.post('/api/analisiscombustible/QlikView', cors(corsOptionsDelegate),function
     });    
 });
 
+app.post('/api/analisiscombustible/ExportRegistroAnalisisCombus', cors(corsOptionsDelegate),function (req, res) {  
+    console.log('Node server has been invoked. Now calling Backend service API ...');
+    _getAccessToken()
+    .then((result) => {
+        console.log('Successfully fetched OAuth access token: ' +  result.accessToken.substring(0,16));
+        var sUrl = HOST + "/api/analisiscombustible/ExportRegistroAnalisisCombus";
+        return _doQUERY(sUrl, result.accessToken, req.body, 'POST');
+    })
+    .then((result) => {
+        console.log('Successfully called OData service. Response body: ' + result.responseBody);
+        res.status(200).send(JSON.stringify(result.responseBody));
+    })
+    .catch((error) => {
+        console.log(error.message + ' Reason: ' + error.error);
+        res.status(500).send('ERROR: ' + error.message + ' - FULL ERROR: ' + error.error);
+    });    
+});
 
+app.post('/api/reportesmodifdatoscombustible/Exportar', cors(corsOptionsDelegate),function (req, res) {  
+    console.log('Node server has been invoked. Now calling Backend service API ...');
+    _getAccessToken()
+    .then((result) => {
+        console.log('Successfully fetched OAuth access token: ' +  result.accessToken.substring(0,16));
+        var sUrl = HOST + "/api/reportesmodifdatoscombustible/Exportar";
+        return _doQUERY(sUrl, result.accessToken, req.body, 'POST');
+    })
+    .then((result) => {
+        console.log('Successfully called OData service. Response body: ' + result.responseBody);
+        res.status(200).send(JSON.stringify(result.responseBody));
+    })
+    .catch((error) => {
+        console.log(error.message + ' Reason: ' + error.error);
+        res.status(500).send('ERROR: ' + error.message + ' - FULL ERROR: ' + error.error);
+    });    
+});
 
 app.post('/api/tripulantes/RegistroZarpe/', cors(corsOptionsDelegate),function (req, res) {  
     console.log('Node server has been invoked. Now calling Backend service API ...');
@@ -954,6 +1016,24 @@ app.post('/api/embarcacion/ValidarMarea/', cors(corsOptionsDelegate),function (r
 /**
  * POST Read table
  */
+ app.post('/api/General/ConsultaRol/', cors(corsOptionsDelegate),function (req, res) {  
+    console.log('Node server has been invoked. Now calling Backend service API ...');
+    _getAccessToken()
+    .then((result) => {
+        console.log('Successfully fetched OAuth access token: ' +  result.accessToken.substring(0,16));
+        var sUrl = HOST + "/api/General/ConsultaRol/";
+        return _doQUERY(sUrl, result.accessToken, req.body, 'POST');
+    })
+    .then((result) => {
+        console.log('Successfully called OData service. Response body: ' + result.responseBody);
+        res.status(200).send(JSON.stringify(result.responseBody));
+    })
+    .catch((error) => {
+        console.log(error.message + ' Reason: ' + error.error);
+        res.status(500).send('ERROR: ' + error.message + ' - FULL ERROR: ' + error.error);
+    });    
+});
+
  app.post('/api/General/Maestro_ObtenerRegistros/', cors(corsOptionsDelegate),function (req, res) {  
     console.log('Node server has been invoked. Now calling Backend service API ...');
     _getAccessToken()
@@ -971,6 +1051,7 @@ app.post('/api/embarcacion/ValidarMarea/', cors(corsOptionsDelegate),function (r
         res.status(500).send('ERROR: ' + error.message + ' - FULL ERROR: ' + error.error);
     });    
 });
+
 app.post('/api/General/Read_Table/', cors(corsOptionsDelegate),function (req, res) {  
     console.log('Node server has been invoked. Now calling Backend service API ...');
     _getAccessToken()
@@ -1850,6 +1931,23 @@ app.post('/api/analisiscombustible/Listar', cors(corsOptionsDelegate),function (
     });
 });
 
+app.post('/api/analisiscombustible/ExportQlikView', cors(corsOptionsDelegate),function (req, res) {  
+    console.log('Node server has been invoked. Now calling Backend service API ...');
+    _getAccessToken()
+    .then((result) => {
+        console.log('Successfully fetched OAuth access token: ' +  result.accessToken.substring(0,16));
+        var sUrl = HOST + "/api/analisiscombustible/ExportQlikView";
+        return _doQUERY(sUrl, result.accessToken, req.body, 'POST');
+    })
+    .then((result) => {
+        console.log('Successfully called OData service. Response body: ' + result.responseBody);
+        res.status(200).send(JSON.stringify(result.responseBody));
+    })
+    .catch((error) => {
+        console.log(error.message + ' Reason: ' + error.error);
+        res.status(500).send('ERROR: ' + error.message + ' - FULL ERROR: ' + error.error);
+    });
+});
 /**
  * @Sistema de flota 
  */
@@ -1967,6 +2065,27 @@ app.post('/api/sistemainformacionflota/PescaDescargada', cors(corsOptionsDelegat
     .then((result) => {
         console.log('Successfully fetched OAuth access token: ' +  result.accessToken.substring(0,16));
         var sUrl = HOST + "/api/sistemainformacionflota/PescaPorEmbarcacion";
+        return _doQUERY(sUrl, result.accessToken, req.body, 'POST');
+    })
+    .then((result) => {
+        console.log('Successfully called OData service. Response body: ' + result.responseBody);
+        res.status(200).send(JSON.stringify(result.responseBody));
+    })
+    .catch((error) => {
+        console.log(error.message + ' Reason: ' + error.error);
+        res.status(500).send('ERROR: ' + error.message + ' - FULL ERROR: ' + error.error);
+    });
+});
+
+/**
+ * Exportar excel Pesca por embarcación
+ */
+ app.post('/api/sistemainformacionflota/ExportPescaPorEmbarcacion', cors(corsOptionsDelegate),function (req, res) {  
+    console.log('Node server has been invoked. Now calling Backend service API ...');
+    _getAccessToken()
+    .then((result) => {
+        console.log('Successfully fetched OAuth access token: ' +  result.accessToken.substring(0,16));
+        var sUrl = HOST + "/api/sistemainformacionflota/ExportPescaPorEmbarcacion";
         return _doQUERY(sUrl, result.accessToken, req.body, 'POST');
     })
     .then((result) => {
