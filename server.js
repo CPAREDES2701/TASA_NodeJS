@@ -54,7 +54,8 @@ var allowlist = [
     'https://workspaces-ws-ndjqc-app3.us10.applicationstudio.cloud.sap',  //Ruben
     'https://workspaces-ws-cd8st-app1.us10.applicationstudio.cloud.sap',  //Ruben
     'https://workspaces-ws-ndjqc-app2.us10.applicationstudio.cloud.sap',  //Ruben
-    'https://workspaces-ws-ndjqc-app5.us10.applicationstudio.cloud.sap'   //Ruben
+    'https://workspaces-ws-ndjqc-app5.us10.applicationstudio.cloud.sap',  // Ruben
+    'https://workspaces-ws-ndjqc-app4.us10.applicationstudio.cloud.sap'   //Ruben
 ];
 var corsOptionsDelegate = function (req, callback) {
   var corsOptions;
