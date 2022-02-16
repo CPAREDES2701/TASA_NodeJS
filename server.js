@@ -50,6 +50,8 @@ var allowlist = [
     'https://workspaces-ws-qdslk-app1.us10.applicationstudio.cloud.sap',
     'https://tasaqas.launchpad.cfapps.us10.hana.ondemand.com',             // launchpad 
     'https://tasadev.launchpad.cfapps.us10.hana.ondemand.com',
+    'https://tasaprd.launchpad.cfapps.us10.hana.ondemand.com',
+    'https://tasaprd.cpp.cfapps.us10.hana.ondemand.com',
     'https://workspaces-ws-ndjqc-app1.us10.applicationstudio.cloud.sap',  //Ruben
     'https://workspaces-ws-ndjqc-app3.us10.applicationstudio.cloud.sap',  //Ruben
     'https://workspaces-ws-cd8st-app1.us10.applicationstudio.cloud.sap',  //Ruben
@@ -78,6 +80,8 @@ const XSUAA_ZONEID = VCAP_SERVICES.xsuaa[0].credentials.identityzone;
 var HOST = 'https://flotabackend.cfapps.us10.hana.ondemand.com';
 if (XSUAA_ZONEID == "tasaqas") {
     HOST = 'https://flotabackendqas.cfapps.us10.hana.ondemand.com';
+}else if(XSUAA_ZONEID == "tasaprd"){
+    HOST = 'https://flotabackendprd.cfapps.us10.hana.ondemand.com';
 }
 
 var HOST2 = 'https://current-user-qas.cfapps.us10.hana.ondemand.com/';
@@ -2108,6 +2112,24 @@ app.post('/api/sistemainformacionflota/PescaCompetenciaProduce', cors(corsOption
     .then((result) => {
         console.log('Successfully fetched OAuth access token: ' +  result.accessToken.substring(0,16));
         var sUrl = HOST + "/api/sistemainformacionflota/PescaCompetenciaProduce";
+        return _doQUERY(sUrl, result.accessToken, req.body, 'POST');
+    })
+    .then((result) => {
+        console.log('Successfully called OData service. Response body: ' + result.responseBody);
+        res.status(200).send(JSON.stringify(result.responseBody));
+    })
+    .catch((error) => {
+        console.log(error.message + ' Reason: ' + error.error);
+        res.status(500).send('ERROR: ' + error.message + ' - FULL ERROR: ' + error.error);
+    });
+});
+
+app.post('/api/sistemainformacionflota/ReportePescaCompProd', cors(corsOptionsDelegate),function (req, res) {  
+    console.log('Node server has been invoked. Now calling Backend service API ...');
+    _getAccessToken()
+    .then((result) => {
+        console.log('Successfully fetched OAuth access token: ' +  result.accessToken.substring(0,16));
+        var sUrl = HOST + "/api/sistemainformacionflota/ReportePescaCompProd";
         return _doQUERY(sUrl, result.accessToken, req.body, 'POST');
     })
     .then((result) => {
