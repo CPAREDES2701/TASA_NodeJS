@@ -4,6 +4,6 @@ applications:
   memory: 512M
   instances: 1
   routes:
-    - route: cf-nodejs-qas.cfapps.us10.hana.ondemand.com
+    - route: cf-nodejs-prd.cfapps.us10.hana.ondemand.com
   services:
     - jco-xsuaa
