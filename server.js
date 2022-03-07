@@ -97,7 +97,7 @@ const _getAccessToken = function() {
             scopes: []
         });
 
-        oautClient.owner.getToken('ctirado@xternal.biz', 'c#ls0Tir4d0$2021')
+        oautClient.owner.getToken('tasa_btp@xternal.biz', 'hX8MG$0LTEFo')
         .then((result) => {
             resolve({accessToken: result.accessToken});
         })
