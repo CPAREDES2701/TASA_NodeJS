@@ -2874,6 +2874,24 @@ app.get('/api/General/VerArchivo', cors(corsOptionsDelegate),function (req, res)
     });    
 });
 
+app.post('/api/General/SubirArchivoAzure', cors(corsOptionsDelegate),function (req, res) {  
+    console.log('Node server has been invoked. Now calling Backend service API ...');
+    _getAccessToken()
+    .then((result) => {
+        console.log('Successfully fetched OAuth access token: ' +  result.accessToken.substring(0,16));
+        var sUrl = HOST + "/api/General/SubirArchivoAzure";
+        return _doQUERY(sUrl, result.accessToken, req.body, 'POST');
+    })
+    .then((result) => {
+        console.log('Successfully called OData service. Response body: ' + result.responseBody);
+        res.status(200).send(JSON.stringify(result.responseBody));
+    })
+    .catch((error) => {
+        console.log(error.message + ' Reason: ' + error.error);
+        res.status(500).send('ERROR: ' + error.message + ' - FULL ERROR: ' + error.error);
+    });
+});
+
 /*ar.beforeRequestHandler.use('/jwtdecode', function (req, res, next) {
 	if (!req.user) {
 	  res.statusCode = 403;
