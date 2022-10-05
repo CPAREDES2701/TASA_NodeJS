@@ -2913,6 +2913,30 @@ app.post('/api/General/ObtenerRolProv', cors(corsOptionsDelegate),function (req,
     });
 });
 
+app.get('/api/General/ObtenerListaImagenes', cors(corsOptionsDelegate),function (req, res) {  
+    console.log('Node server has been invoked. Now calling Backend service API ...');
+    _getAccessToken()
+    .then((result) => {
+        let numPedido = req.query.numPedido;
+        console.log("numPedido :" +  numPedido);
+        console.log('Successfully fetched OAuth access token: ' +  result.accessToken.substring(0,16));
+        var sUrl = HOST + "/api/General/ObtenerListaImagenes?numPedido=" +  numPedido;//+ req.query.nomImg;
+        var token = result.accessToken;
+        var sMethod = 'GET';
+
+        return _doQUERY2(sUrl, token, req.body, sMethod,res);
+        
+    })
+    .then((result) => {
+        console.log('Successfully called OData service. Response body: ' + result.responseBody);
+        res.status(200).send(JSON.stringify(result.responseBody));
+    })
+    .catch((error) => {
+        console.log(error.message + ' Reason: ' + error.error);
+        res.status(500).send('ERROR: ' + error.message + ' - FULL ERROR: ' + error.error);
+    });    
+});
+
 /*ar.beforeRequestHandler.use('/jwtdecode', function (req, res, next) {
 	if (!req.user) {
 	  res.statusCode = 403;
