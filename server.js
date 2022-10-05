@@ -2876,12 +2876,13 @@ app.get('/api/General/VerArchivo', cors(corsOptionsDelegate),function (req, res)
 });
 
 app.post('/api/General/SubirArchivoAzure', cors(corsOptionsDelegate),function (req, res) {  
+    res.setHeader('Content-Type', 'application/json');  
     console.log('Node server has been invoked. Now calling Backend service API ...');
     _getAccessToken()
     .then((result) => {
         console.log('Successfully fetched OAuth access token: ' +  result.accessToken.substring(0,16));
         var sUrl = HOST + "/api/General/SubirArchivoAzure";
-        return _doQUERY(sUrl, result.accessToken, req.body, 'POST');
+        return _doQUERY2(sUrl, result.accessToken, req.body, 'POST');
     })
     .then((result) => {
         console.log('Successfully called OData service. Response body: ' + result.responseBody);
