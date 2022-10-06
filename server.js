@@ -2875,14 +2875,14 @@ app.get('/api/General/VerArchivo', cors(corsOptionsDelegate),function (req, res)
     });    
 });
 
-app.get('/api/General/VerEvidencia', cors(corsOptionsDelegate),function (req, res) {  
+app.get('/api/General/VerEvidenciaImg', cors(corsOptionsDelegate),function (req, res) {  
     console.log('Node server has been invoked. Now calling Backend service API ...');
     _getAccessToken()
     .then((result) => {
         let nomImagen = req.query.nomImagen;
         console.log("NomImagen :" +  nomImagen);
         console.log('Successfully fetched OAuth access token: ' +  result.accessToken.substring(0,16));
-        var sUrl = HOST + "/api/General/VerEvidencia?nomImagen=" +  nomImagen;//+ req.query.nomImg;
+        var sUrl = HOST + "/api/General/VerEvidenciaImg?nomImagen=" +  nomImagen;//+ req.query.nomImg;
         var token = result.accessToken;
         var sMethod = 'GET';
         var sBody = null;
