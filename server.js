@@ -2968,6 +2968,25 @@ app.post('/api/General/ObtenerRolProv', cors(corsOptionsDelegate),function (req,
     });
 });
 
+app.post('/api/General/ObtenerDatosAD', cors(corsOptionsDelegate),function (req, res) {
+    res.setHeader('Content-Type', 'application/json');  
+    console.log('Node server has been invoked. Now calling Backend service API ...');
+    _getAccessToken()
+    .then((result) => {
+        console.log('Successfully fetched OAuth access token: ' +  result.accessToken.substring(0,16));
+        var sUrl = HOST + "/api/General/ObtenerDatosAD";
+        return _doQUERY2(sUrl, result.accessToken, req.body, 'POST',res);
+    })
+    .then((result) => {
+        console.log('Successfully called OData service. Response body: ' + result.responseBody);
+        res.status(200).send(JSON.stringify(result.responseBody));
+    })
+    .catch((error) => {
+        console.log(error.message + ' Reason: ' + error.error);
+        res.status(500).send('ERROR: ' + error.message + ' - FULL ERROR: ' + error.error);
+    });
+});
+
 app.get('/api/General/ObtenerListaImagenes', cors(corsOptionsDelegate),function (req, res) {  
     console.log('Node server has been invoked. Now calling Backend service API ...');
     _getAccessToken()
