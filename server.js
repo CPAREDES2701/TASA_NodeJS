@@ -67,6 +67,9 @@ const _getAccessToken = function() {
             clientSecret: XSUAA_CLIENTSECRET,
             scopes: []
         });
+        console.log(XSUAA_URL + '/oauth/token');
+        console.log(XSUAA_CLIENTID);
+        console.log(XSUAA_CLIENTSECRET);
 
         oautClient.owner.getToken('tasa_btp@xternal.biz', 'hX8MG$0LTEFo')
         .then((result) => {
